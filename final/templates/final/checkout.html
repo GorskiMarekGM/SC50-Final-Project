@@ -1,0 +1,237 @@
+{% extends 'final/layout.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+	{% if message %}
+	<div class="row" style="height: 552px;">
+		<div class="col-lg-12">
+				<div class="box-element">
+					<div class="previous-page nice-font mobile-register-goback" onClick="javascript:history.go(-1);">&#x2190; Back</div>
+					<div class="message" style="padding:2em; text-align:center;font-size: x-large; color:#b11818 ;">{{ message }}</div>
+				</div>
+		</div>
+	</div>
+	{% else %}
+	<div class="row" style="height: 552px; position: relative;;">
+		
+		<div class="col-lg-6" id="2">
+			<div class="box-element" >
+				<div class="previous-page nice-font mobile-register-goback" onClick="javascript:history.go(-1);">&#x2190; Back</div>
+				<div class="scroll-down"></div>
+				<hr>
+				<h3>Summary</h3>
+				<h5>Call us by <a style="font-weight: 700;color: #b11818; cursor: pointer; text-decoration: underline;" href="{% url 'contact' %}">phone</a></h5>
+				<hr>
+				{% for item in items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2">
+						<p>{{item.product.name}}</p>
+					</div>
+					<div style="flex:1">
+						<p>{{item.product.price|floatformat:2}}zł</p>
+					</div>
+					<div style="flex:1">
+						<p>x{{item.quantity}}</p>
+					</div>
+				</div>
+				{% endfor %}
+				<h5>Quantity: {{order.get_cart_items}}</h5>
+				<div class="totalValue"><h5>Sum: {{total|floatformat:2}}zł</h5></div>
+				<hr>
+				<div class="description">
+					<div class="nice-font profile-goback" onclick="displayTextArea()">Add description</div>
+				</div>
+			</div>
+			<form id="form" class="hidden">
+				<input class="form-control" type="email" name="email" value="{{user.email}}">
+				<input class="form-control" type="text" name="phoneNr" value="{{user.phone_number}}">
+				<input class="form-control" type="text" name="street" value="{{user.street}}">
+				<input class="form-control" type="text" name="houseNr" value="{{user.houseNr}}">
+				<input class="form-control" type="text" name="city" value="{{user.city}}">
+			</form>
+		</div>
+		<div class="col-lg-6" id="1">
+
+			<div class="box-element" id="payment-local">
+				<small>Chose delivery, or personal collect</small>
+				<div class="btn-payment make-payment button-cash" data-name="gotowka">Pay by cash</div>
+				<div class="btn-payment make-payment button-card" data-name="karta">Pay by card </div>
+				<div class="btn-payment make-payment button-collect" data-name="odbior">Personal collect in restaurant</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+</div>
+
+<script>
+
+	var total = '{{total}}'
+	var comment = ''
+
+	function preLoad() {
+		document.querySelector('.container').innerHTML = `
+					<img class="center-load" src="{% static 'final/IMG/load.gif' %}" />
+			
+			`
+	}
+
+	function getComment(){
+		//comment
+		try {
+			form3 = document.getElementById('form-3')
+			comment.comment = form3.comment.value
+		} catch (error) {
+			comment.comment = ""
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	var form;
+	
+	
+	form = document.getElementById('form')
+	
+	var transactionType = null;
+
+	//get transacion type based on user click
+	function transType() {
+		var paymentType = null;
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelector('.button-cash').onclick = function () {
+				getComment()
+				preLoad()
+				paymentType = this.dataset.name;
+				console.log(paymentType);
+				submitFormData(paymentType)
+			}
+			document.querySelector('.button-card').onclick = function () {
+				getComment()
+				preLoad()
+				paymentType = this.dataset.name;
+				console.log(paymentType);
+				submitFormData(paymentType)
+			}
+			document.querySelector('.button-collect').onclick = function () {
+				getComment()
+				preLoad()
+				paymentType = this.dataset.name;
+				console.log(paymentType);
+				submitFormData(paymentType)
+			}
+		})
+		return paymentType;
+	}
+	transType()
+
+
+	function submitFormData(paymentType) {
+		console.log('Payment button clicked')
+
+		var userFormData = {
+			'email': null,
+			'phoneNr': null,
+			'total': total,
+			'transactionType': paymentType,
+		}
+
+		var deliveryData = {
+			'street': null,
+			'houseNr': null,
+			'city': null,
+		}
+
+		if (user == 'AnonymousUser') {
+
+			//assigning values to fields
+			userFormData.email = '{{email}}'
+			userFormData.phoneNr = '{{phone_number}}'
+
+			deliveryData.street = '{{street}}'
+			deliveryData.houseNr = '{{houseNr}}'
+			deliveryData.city = '{{city}}'
+
+		}
+
+		console.log('email:', userFormData.email)
+		console.log('phoneNr:', userFormData.phoneNr)
+		console.log('street:', deliveryData.street)
+		console.log('houseNr:', deliveryData.houseNr)
+		console.log('city:', deliveryData.city)
+		console.log('Total:', userFormData.total)
+		console.log('TransactionType:', userFormData.transactionType)
+		console.log('Comment:', comment.comment)
+
+		var url = "/process_order/"
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': csrftoken,
+			},
+			body: JSON.stringify({ 'form': userFormData, 'delivery': deliveryData, 'comment': comment }),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('Success:', data);
+				
+				cart = {}
+				document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+				setTimeout(function () {
+				window.location.href = "{% url 'thank_you' %}"
+					
+					
+				}, 2000);
+			})
+			.catch((error) => {
+				// alert('Coś poszło nie tak! Sprawdź czy podany adres znajduje się w zasięgu dowozu restauracji.');
+				document.querySelector('.container').innerHTML = `
+				
+				{% if messages %}
+					{% for message in messages %}
+					<div class="box-element">
+						<div class="previous-page nice-font mobile-register-goback" onClick="javascript:history.go(-1);">&#x2190; Powrót</div>
+						<div class="text-message"> {{ message }} </div>
+					</div>
+					{% endfor %}
+				{% endif %}
+				`;
+				// alert(error);
+			})
+	}
+
+	function displayTextArea() {
+
+		var description = document.querySelector('.description');
+		description.innerHTML = `
+				<form id="form-3">
+					<textarea name="comment" style="width:100%;"></textarea>
+				</form>
+				`
+	}
+
+</script>
+
+<!-- MOBILE -->
+<script type="text/javascript">
+    if(window.innerWidth <= 430 ){
+      mobileCartDisplay()
+    }else{
+
+    }
+
+    function mobileCartDisplay(){
+
+		document.querySelector('.scroll-down').innerHTML =`
+		<br>
+		<a href="#1">
+			<div class="previous-page nice-font mobile-register-goback" style="margin:0px;">Pay &#x2193;</div>
+		</a>
+		`;
+	}
+
+</script>
+{% endblock body %}

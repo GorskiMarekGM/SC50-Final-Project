@@ -1,0 +1,63 @@
+{% extends "final/layout.html" %}
+{% load static %}
+
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="{% static 'final/JS/parallax.min.js' %}"></script>
+
+<div role="main" class="main">
+    <section class="section section-no-background section-no-border m-none">
+        <div class="container">
+
+            <div class="box-element event-organize">
+                <div class="row mb-xl">
+                    <div class="col-md-6">
+                        <h3 class="mb-none pb-none text-uppercase">Make party in our restaurant!</h3>
+                        <div class="divider divider-primary divider-small mb-xl mt-none">
+                            <hr class="mt-sm">
+                        </div>
+                        <p class="mt-lg">Curabitur tincidunt ex id ligula fermentum, sed semper eros varius. Integer tempor at quam ut mattis. Etiam faucibus, urna eu malesuada convallis, lectus risus volutpat dolor, sed feugiat quam mi volutpat dui. Sed in sagittis ipsum. Sed bibendum placerat lacus in tristique. Cras faucibus suscipit risus, a tincidunt quam vehicula in. Ut bibendum dignissim risus vel semper. Nullam viverra molestie lacus eget eleifend. Proin fermentum vestibulum pretium.</p>
+                        <p class="mt-lg">Curabitur tincidunt ex id ligula fermentum, sed semper eros varius. Integer tempor at quam ut mattis. Etiam faucibus, urna eu malesuada convallis, lectus risus volutpat dolor, sed feugiat quam mi volutpat dui. Sed in sagittis ipsum. Sed bibendum placerat lacus in tristique. Cras faucibus suscipit risus, a tincidunt quam vehicula in. Ut bibendum dignissim risus vel semper. Nullam viverra molestie lacus eget eleifend. Proin fermentum vestibulum pretium.</p>
+                        <p class="mt-lg">Curabitur tincidunt ex id ligula fermentum, sed semper eros varius. Integer tempor at quam ut mattis. Etiam faucibus, urna eu malesuada convallis, lectus risus volutpat dolor, sed feugiat quam mi volutpat dui. Sed in sagittis ipsum. Sed bibendum placerat lacus in tristique. Cras faucibus suscipit risus, a tincidunt quam vehicula in. Ut bibendum dignissim risus vel semper. Nullam viverra molestie lacus eget eleifend. Proin fermentum vestibulum pretium.</p>
+                        <p class="mt-lg">Curabitur tincidunt ex id ligula fermentum, sed semper eros varius. Integer tempor at quam ut mattis. Etiam faucibus, urna eu malesuada convallis, lectus risus volutpat dolor, sed feugiat quam mi volutpat dui. Sed in sagittis ipsum. Sed bibendum placerat lacus in tristique. Cras faucibus suscipit risus, a tincidunt quam vehicula in. Ut bibendum dignissim risus vel semper. Nullam viverra molestie lacus eget eleifend. Proin fermentum vestibulum pretium.</p>
+                       
+                        <a class='btn-new btn-contact btn-event btn-event-fullwidth font-size-sm text-uppercase mt-sm mb-xlg'
+                            href="{% url 'contact' %}">Call or writte</a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="-mt-xl center clearfix event-img" style="margin-bottom: 30px;">
+                            <img style="width: 100%;" src="{% static 'final/IMG/slides/w3.jpg' %}" alt="">
+                        </div>
+                        <ul
+                            class="list list-icons list-primary list-borders text-uppercase text-color-dark font-size-sm">
+                            <li>
+                                <i class="fa fa-check"></i>Integer tempor at quam ut mattis.
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i>Integer tempor at quam ut mattis.
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i>Integer tempor at quam ut mattis.
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i>Integer tempor at quam ut mattis.
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i>Integer tempor at quam ut mattis.
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i>Integer tempor at quam ut mattis.
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i>Integer tempor at quam ut mattis.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+    </section>
+</div>
+
+{% endblock %}

@@ -1,0 +1,195 @@
+{% extends 'final/layout.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+	<div class="row" style="height: 552px;">
+		<div class="col-lg-12">
+			<div id="next">
+				<div class="box-element">
+					<div class="go-back">
+						<div style="flex:1">
+							<a  class="btn btn-goback" onClick="javascript:history.go(-1);">&#x2190; Back</a>
+						</div>
+						<div style="flex:1">
+							{% if message %}
+							<div class="discount-info"><div class="message" style="font-weight: 500;font-size: x-large; color:#b11818 ;">{{ message }}</div></div>
+							{% else %}
+								<div class="discount-info">For personal collect we ofer discount 10%</div>
+							{% endif %}
+						</div>
+						
+						<br>
+						<br>
+
+					</div>
+					
+
+					<table class="table">
+						<tr>
+							<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+							<th><h5>Sum:<strong> {{total|floatformat:2}}zł</strong></h5></th>
+							<th>
+								<a  style="float:right; margin:5px; color:#fff" class="btn btn-success" onclick="next()">Checkout</a>
+							</th>
+						</tr>
+					</table>
+
+				</div>
+
+				<br>
+				<div class="box-element" id="2">
+
+					<div class="cart-row">
+						<div style="flex:1"></div>
+						<div style="flex:1"><strong>Name</strong></div>
+						<div style="flex:1"><strong>Price</strong></div>
+						<div style="flex:1"><strong>Quantity</strong></div>
+						<div style="flex:1"><strong>Sum</strong></div>
+						<div style="flex:1"><strong>Delete</strong></div>
+					</div>
+					{% for item in items %}
+					<div class="cart-row">
+						<div style="flex:1"><img class="row-image" src="{{item.product.imageURL}}"></div>
+						<div style="flex:1"><p>{{item.product.name}}</p></div>
+						<div class="name"></div>
+						<div class="totalPrice"></div>
+						
+
+						<div style="flex:1" class="price"><p> {{item.product.price|floatformat:2}}zł</p></div>
+						<div style="flex:1">
+							<p class="quantity">{{item.quantity}}</p>
+							<div class="quantity">
+								<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'final/IMG/arrow-up.png' %}">
+						
+								<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'final/IMG/arrow-down.png' %}">
+							</div>
+						</div>
+						<div style="flex:1"><p>{{item.get_total|floatformat:2}}zł</p></div>
+						<div style="flex:1" data-product="{{item.product.id}}" data-action="delete" class="chg-quantity update-cart">x</div>
+					</div>
+					{% endfor %}
+
+					
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+<!-- Restauration Closed -->
+<script>
+	
+	function next(){
+			form = document.getElementById('form')
+			
+			document.getElementById('next').innerHTML = `
+
+				<div class="box-element" id="form-wrapper">
+					<form id="form" action="{% url 'checkout' %}" method="post">
+						{% csrf_token %}
+						<div id="user-info">
+							<h3>Client Data:</h3>
+							<hr>
+							<div class="form-field">
+								<input required class="form-control" type="email" name="email" placeholder="Email..">
+							</div>
+							<div class="form-field">
+								<input class="form-control" type="text" name="phoneNr" placeholder="Phone number..">
+							</div>
+						</div>
+						<div id="shipping-info" style="padding-top: 1em;">
+							<hr>
+							<h3>Address:</h3>
+							<hr>
+							<div class="form-field">
+								<input class="form-control" type="text" name="street" placeholder="Street..">
+							</div>
+							<div class="form-field">
+								<input class="form-control" type="text" name="houseNr" placeholder="House/number..">
+							</div>
+							<div class="form-field">
+								<input class="form-control" type="text" name="city" placeholder="City..">
+							</div>
+						</div>
+	
+						<hr>
+						<input id="form-button" class="btn btn-success btn-block" type="submit" value="Next">
+					</form>
+				</div>
+			`
+
+		}
+	
+</script>
+
+<!-- MOBILE -->
+<script type="text/javascript">
+    if(window.innerWidth <= 992 ){
+      mobileCartDisplay()
+    }else{
+
+    }
+
+    function mobileCartDisplay(){
+
+		document.querySelector('.go-back').innerHTML =`
+			<div class="previous-page nice-font mobile-register-goback" style="margin:0px;" onClick="javascript:history.go(-1);">&#x2190; Back</div><br>
+			<div class="previous-page nice-font mobile-register-goback" style="margin:0px;" onClick="next()">Next &#x2192;</div>
+		`;
+
+    //   document.querySelector('.box-element').innerHTML = '';
+	  document.getElementById('2').innerHTML = '';
+
+	  document.getElementById('2').innerHTML = `
+	  {% for item in items %}
+				<div class="row cartMobile nice-font">
+					<div class="col-4">
+						<img class="row-image" src="{{item.product.imageURL}}">
+					</div>
+					<div class="col-8">
+						<div class="nice-font">Nazwa: {{item.product.name}}</div>
+						{% if item.product.meal_type|stringformat:"s" == "Pizza"  %}
+						<div style="flex:1"><p class="quantity" style="font-weight: 400;">Size: {{item.product.size}} cm</p><br>
+							<div class="quantity">
+								<div class="minus"> - </div>
+								<div class="nice-font mobile-cart-quantity change-size" data-product="{{item.product.id}}" data-size="{{item.product.size}}" data-action="smaller">&#x2190;</div>
+								<div class="nice-font mobile-cart-quantity change-size" data-product="{{item.product.id}}" data-size="{{item.product.size}}" data-action="bigger">&#x2192;</div>
+								<div class="plus"> + </div>
+							</div>
+						</div>
+						{% endif %}
+						<div class="nice-font">Price: {{item.product.price}} zł</div>
+						<div class="nice-font">Quantity:<p class="quantity"> {{item.quantity}}</p></div>
+						<div class="quantity">
+							<div class="minus"> - </div>
+							<div class="nice-font mobile-cart-quantity update-cart" data-product="{{item.product.id}}" data-product="{{item.product.id}}" data-action="remove">&#x2190;</div>
+							<div class="nice-font mobile-cart-quantity update-cart" data-product="{{item.product.id}}" data-product="{{item.product.id}}" data-action="add">&#x2192;</div>
+							<div class="plus"> + </div>
+						</div>
+						<br>
+						Delete:
+						<div style="flex:1" data-product="{{item.product.id}}" data-action="delete" class="chg-quantity update-cart">X</div>
+					</div>
+				</div>
+				{% endfor %}
+	  `;
+      
+	  document.querySelector('.table').innerHTML = `
+	  	{% if message %}
+		<div class="discount-info"><div class="message" style="font-weight: 500;font-size: x-large; color:#b11818 ;">{{ message }}</div></div>
+		{% endif %}
+	  <table class="table">
+
+					<tr>
+						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+					</tr>
+					<tr>
+						<th><h5>Sum:<strong> {{total|floatformat:2}}zł</strong></h5></th>
+					</tr>
+				</table>
+	  `;
+    }
+</script>
+  <script src="{% static 'final/JS/working_hours.js' %}"></script>
+  <script src="{% static 'final/JS/cart_pizza_size.js' %}"></script>
+  
+{% endblock body %}

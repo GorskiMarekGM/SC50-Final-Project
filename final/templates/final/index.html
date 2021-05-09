@@ -1,0 +1,150 @@
+{% extends 'final/layout.html' %}
+{% load static %}
+{% block body %}
+
+<!-- posts section -->
+<div class="posts-container" style="margin-top: 4em;">
+
+    <div class="meals-nav"></div>
+   
+    <!--- Message -->
+    <div class="container-fluid">
+        <div class="row welcome text-center">
+            <div class="message"></div>
+            <hr>
+        </div>
+    </div>
+   
+
+        <!--- Dania Mięsne -->
+        <div class="meal-name container-fluid padding" id="dania">
+            <div class="row welcome text-center">
+                <div class="col-12">
+                    <h1 class="display-4">Meals</h1>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <!-- Food section -->
+        <div class="container-fluid padding">
+            <div class="row text-center">
+                {% for meal in meals_list %}
+                <!-- <div onclick="openInNewTab(`{% url 'checkout' %}`)"> -->
+                <div class="col-sm-6 col-lg-3">
+                    <!-- onclick="display_meal('{{meal}}')" -->
+                    <div class="card" data-id="{{meal.id}}">
+                        {% if n.imageURL != '' %}
+                        <img class="card-img-top" src="{{meal.imageURL}}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h4 class="card-title">{{meal.name}}</h4>
+                            {% if meal.description != None %}
+                            <p class="card-text">{{meal.description}}</p>
+                            {% endif %}
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="price">{{meal.price|floatformat:2}} zł</div>
+                                </div>
+                                <div class="col">
+                                    <!-- meal.id and "add" are passed to JS -->
+                                    <button id="button" data-product={{meal.id}} data-action="add"
+                                        class="btn btn-outline-secondary add-btn update-cart">Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+
+                {% endfor %}
+            </div>
+        </div>
+
+      
+
+<script src="{% static 'final/JS/search.js' %}"></script>
+<script>
+
+    //Script to handle onclick events on each card in order to display proper website
+
+    document.addEventListener('DOMContentLoaded', () => {
+        clickIt()
+    });
+
+    function clickIt() {
+
+        const list = document.querySelectorAll('.card');
+        var meal = document.querySelectorAll("div.card");
+
+
+        for (let i = 0; i < list.length; i++) {
+            const article = list[i];
+
+            list[i].addEventListener('click', event => {
+
+                if (event.target.classList.contains('btn-outline-secondary')) { }
+                else {
+                    var meal_id = meal[i].dataset.id
+                    location.href = "{% url 'meal' 123 %}".replace('123', meal_id);
+                }
+            });
+
+        }
+    }
+
+</script>
+
+
+<!-- MOBILE -->
+<script>
+    if (window.innerWidth <= 866) {
+        displayMobile()
+    } else {
+
+    }
+
+    function displayMobile() {
+        document.querySelector('.meals-nav').innerHTML = `
+            <div class="hideMe">
+                <select style="border-bottom: 1px solid;" class="mobile-search" onchange="javascript:location.href = this.value;"> 
+                    <option value="#zupy">Zupy</option> 
+                    <option value="#przystawki">Przystawki</option> 
+                    <option value="#dania">Dania</option> 
+                    <option value="#pasta">Pasta</option> 
+                    <option value="#ryby">Ryby</option> 
+                    <option value="#salatki">Salatki</option> 
+                    <option value="#pizza">Pizza</option> 
+                    <option value="#desery">Desery</option> 
+                    <option value="#dodatki">Dodatki</option> 
+                    <option value="#napoje">Napoje</option> 
+                </select> ` +
+            `
+                <input style="border-bottom: 1px solid;" type="text" class="search nice-font" id="my-filter-mobile" onkeypress="mobileSearch()" placeholder="Search...">
+            </div>
+            `
+
+
+        // hide search and categories on scroll
+        window.onload = function () {
+            console.log("im running")
+            console.log("iwhat:")
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function () {
+                var currentScrollPos = window.pageYOffset;
+                if (prevScrollpos >= currentScrollPos) {
+                    console.log("scrolling up")
+                    document.querySelector('.meals-nav').style.display = "block";
+                } else {
+                    console.log("scrolling down")
+                    document.querySelector('.meals-nav').style.display = "none";
+                }
+                prevScrollpos = currentScrollPos;
+            }
+        };
+    }
+
+</script>
+
+{% endblock %}

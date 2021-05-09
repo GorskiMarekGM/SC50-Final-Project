@@ -1,0 +1,229 @@
+{% extends "final/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<link href="{% static 'final/CSS/main.css' %}" rel="stylesheet">
+<link href="{% static 'final/CSS/styles.css' %}" rel="stylesheet">
+
+<div class="all">
+  <!-- SLIDER -->
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="{% static 'final/IMG/slides/w1.jpg' %}" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{% static 'final/IMG/slides/w2.jpg' %}" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{% static 'final/IMG/slides/w3.jpg' %}" alt="Third slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{% static 'final/IMG/slides/w4.jpg' %}" alt="Third slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{% static 'final/IMG/slides/w5.jpg' %}" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+  <!-- MEAL OF THE DAY -->
+  <div class="container" style="padding: 0px;">
+    <h2 class="h2-title"></h2>
+    <div class="row">
+      <div class="col">
+        <div class="special" data-id="6">
+          <h5>
+            <div id="text1">MEAL OF THE DAY</div>
+          </h5>
+          <h4>
+            <div id="text2">Tagiatelle sepia with shrimps!!!</div>
+          </h4>
+          <div class="order-img"></div>
+          <div class="order-padding">
+            <!-- Need to set data-product for current meal of the day ID-->
+            <button id="button" style="background-color: #b11818; border: none;" class="btn btn-outline-secondary btn-order add-btn update-cart" data-product="6" data-action="add" onclick="orderedPopUp()">Order now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col" style="padding: 0px 30px;">
+        <div class="about">
+
+
+          <!-- <h4>RESTAURACJA VERONA W SERCU LUBONIA</h4> -->
+          <h3 class="nice-font">Restaurant Verona in Luboń</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in quam diam. Quisque sit amet finibus orci, at posuere massa. Sed venenatis ante est, pharetra facilisis nulla efficitur vel. Sed fringilla massa a orci consectetur gravida. Proin eleifend rhoncus elit, ut rutrum dolor luctus quis. Mauris sagittis consectetur aliquam. Mauris sit amet gravida velit.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in quam diam. Quisque sit amet finibus orci, at posuere massa. Mauris sit amet gravida velit.
+          </p>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <a href="{% url 'meals' %}" class="btn-mobile-red nice-font full-width-btn"
+                style="margin-bottom: 15px;"><span>Check menu</span></a>
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+              <a href="https://walkinto.in/easyembedview/b1Bp2UHZiWbyeB62IBbiW" id="inside" target="_blank"
+                class="btn-mobile-red nice-font full-width-btn">Virtual trip</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EVENT AND CONTACT PART -->
+    <div class="container" style="padding: 0px;">
+      <h2 style="padding-bottom: 0px;">Informations</h2>
+      <div class="row">
+        <div class="col-12">
+          
+        </div>
+        <div class="col" style="padding: 0px 30px; margin-top: 30px;">
+          <div class="about">
+            <h3 class="nice-font">Make party!</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat aliquam sem ac pulvinar. Nunc at nisl maximus, ultricies sem luctus
+            </p>
+            <div class="-mt-xl center clearfix event-img">
+              <img style="width: 100%;" src="{% static 'final/IMG/slides/w3.jpg' %}" alt="">
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <a href="{% url 'events' %}" class="btn-mobile-red nice-font full-width-btn"
+                  style="margin-bottom: 15px;"><span>Party</span></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col" style="padding: 0px 30px; margin-top: 30px;">
+          <div class="about">
+            <h3 class="nice-font">Find us or call us!</h3>
+            <div class="row">
+              <div class="col-sm-12 col-lg-7">
+
+                <p>We are open:<br>
+                  <br> mon-fr: 13:00 – 22:00
+                  <br> weekends: 12:00 – 21:00
+                </p>
+
+              </div>
+              <div class="col-sm-12 col-lg-7">
+                <br>
+                Phone numbers:<br><br>
+                +48 555 555 555
+                <br> +48 666 666 666
+                <br> +48 777 777 777
+
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <a href="{% url 'contact' %}" class="btn-mobile-red nice-font full-width-btn"
+                  style="margin-bottom: 15px;"><span>Contact</span></a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RECOMENDATION PART -->
+      <div class="recomendation">
+        <div class="nice-font">
+          <h2>Our recomendations</h2>
+        </div>
+
+        <div class="container-fluid padding">
+          <div class="row text-center">
+            {% for n in recomended_list %}
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="card" data-id="{{n.id}}">
+                <img class="card-img-top" src="{{n.imageURL}}">
+                <div class="card-body">
+                  <h4 class="card-title">{{n.name}}</h4>
+                  <hr>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="price">{{n.price|floatformat:2}} zł</div>
+                    </div>
+                    <div class="col-6">
+                      <button id="button" data-product={{n.id}} data-action="add"
+                        class="btn btn-outline-secondary add-btn update-cart" onclick="orderedPopUp()">Order</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <h2>Come to us!</h2>
+      <div class="map-container">
+        <iframe class="map-container" style="width: 100%;"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2437.77780692491!2d16.872197715532902!3d52.338176879780214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4704501b77986fc9%3A0xec8da8230f768aa6!2sRestauracja%20Verona!5e0!3m2!1spl!2spl!4v1612976812477!5m2!1spl!2spl"
+          width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+          tabindex="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    //Script to handle onclick events on each card in order to display proper website
+
+    document.addEventListener('DOMContentLoaded', () => {
+      click("card")
+      click("special")
+    });
+
+    function click(name) {
+
+      const list = document.querySelectorAll('.' + name);
+      var meal = document.querySelectorAll("div." + name);
+
+
+      for (let i = 0; i < list.length; i++) {
+        const article = list[i];
+
+        list[i].addEventListener('click', event => {
+
+          if (event.target.classList.contains('btn-outline-secondary')) { }
+          else {
+            var meal_id = meal[i].dataset.id
+            location.href = "{% url 'meal' 123 %}".replace('123', meal_id);
+          }
+        });
+
+      }
+    }
+
+  </script>
+
+
+  {% endblock %}

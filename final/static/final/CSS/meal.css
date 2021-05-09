@@ -1,0 +1,102 @@
+body{
+    height: 100%;
+    width: 100%;
+}
+.cart-area{
+    height: 100%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 1000px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 1000px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .box1{
+      background-color: lightcoral;
+      /* background-image:url(../IMG/danie_3.jpg); */
+      background-size:cover; 
+      background-repeat:no-repeat;
+      background-position: center center;  
+  }
+  .box2{
+      background-color: #fff;
+  }
+  main{
+      height: 80vh;
+      display: grid;
+      grid-template-columns: 1fr 2fr ;
+      grid-template-rows: 1fr;
+  }
+  h2{
+    margin-top: 25px;
+    padding-bottom: 3px;
+    font-family: serif;
+    font-size: 60px;
+    font-weight: 200;
+    text-align: center;
+  }
+  .info{
+    font-size: 36px;
+    font-weight: 400;
+    padding: 2px 50px;
+    padding-top: 15px;
+  }
+  .ingredients, .price{
+    padding: 0px 40px;
+
+  }
+  .ingredients li{
+    padding: 0px 10px;
+  }
+  .name{
+    border-bottom: 1px solid #b11818;
+  }
+  .meal{
+    padding-top: 78px;
+    padding-bottom: 130px;
+  }
+  .shadow{
+    -webkit-box-shadow: 0 30px 60px 0  rgba(58, 58, 58, 0.281);
+    box-shadow: 0 30px 60px 0 rgba(58, 58, 58, 0.281);
+  }
+  .size{
+    margin-left: 41px;
+    margin-bottom: 14px;
+  }

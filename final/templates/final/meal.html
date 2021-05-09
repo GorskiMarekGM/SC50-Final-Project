@@ -1,0 +1,60 @@
+{% extends 'final/layout.html' %}
+{% load static %}
+{% block body %}
+<link href="{% static 'final/CSS/meal.css' %}" rel="stylesheet">
+<div class="meal">
+  
+<div class="cart-area shadow">
+  <div class="go-back ">
+      <input class="previous-page nice-font meal-goback" type="button" value="&#x2190; Wróć" onClick="javascript:history.go(-1);">
+  </div>
+  <main>
+    <div class="box1" style="background-image:url(../{{image}}); ">
+    </div>
+    <div class="box2" id="2">
+      <div class="name">
+      </div>
+        <div class="info"></div>
+        <div class="size" style="visibility: hidden;">
+          Wybierz rozmiar pizzy:
+          <select id="sizeSelect" >
+              <option value="22">22</option>
+              <option value="30" selected="selected">
+                30
+              </option>
+              <option value="50">50</option>
+          </select>
+        </div>
+        <div class="ingredients">
+          <h3>Składniki:</h3>
+        </div>
+        <div class="price">
+          <h3>Cena:</h3>
+          <div class="totalPrice"></div>
+        </div>
+        <table class="table">
+          <tr>
+            <a class="btn btn-success webkit-width" href="{% url 'cart' %}">Koszyk</a>
+            <button id="add" style="float:right;" data-product={{id}} data-action="add" class="btn btn-add add-btn update-cart webkit-width">Zamów</button>
+          </tr>
+        </table>
+    </div>
+</main>
+</div>
+
+</div>
+<script src="{% static 'final/JS/meal.js' %}"></script>
+<script>
+  var id = "{{id}}";
+  console.log('id '+id)
+
+  load_meal_details(id);
+  get_option();
+  option_change();
+  console.log("option "+option_change(id))
+
+  id = option_change(id);
+
+</script>
+
+{% endblock body %}
