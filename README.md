@@ -1,6 +1,6 @@
-Welcome to my final project – “Verona restaurant”
+<h3>Welcome to my final project – “Verona restaurant”</h3>
 
-Idea of this project came from the real aplication which I have created during CS50 course, my boss asked me to do application for online ordering for the restaurant in which I was working. This project is smaller part of my website, because here I just want to focus on cart, and cookies. You can find whole website here https://restauracjaverona.pl/
+Idea of this project came from the real aplication which I have created during CS50 course, my boss asked me to do application for online ordering for the restaurant in which I was working. This project is smaller part of my website, because here I just want to focus on cart, and cookies. To create this project I had to relay on all the knowledge which I have gained during this course. You can find whole website here https://restauracjaverona.pl/
 
 My website is for users which live close to restaurant, it allows them to order food to their houses, or collecting it personally in restaurant. Moreover users can browse whole menu, they can also add items to cart even when they are not logged in. Cart stores all their data in cookies, so even if they close browser, they still have their orders.
 
@@ -13,3 +13,10 @@ In the upper right corner you can see the cart icon, when you click it you will 
 This is all about my website, hope you enjoy 
 
 
+<br><br><br>
+<h5>Getting Started</h5>
+<hr>
+Download the distribution code from https://github.com/GorskiMarekGM/SC50-Final-Project and unzip it. <br>
+In your terminal, cd into the final_project directory. <br>
+Run python manage.py makemigrations network to make migrations for the network app. <br>
+Run python manage.py migrate to apply migrations to your database. <br>
