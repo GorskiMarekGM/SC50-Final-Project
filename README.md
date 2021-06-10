@@ -1,6 +1,8 @@
 Welcome to my final project – “Verona restaurant”
 
-My website is for users who lives close to restaurant, it allows them to order food to their houses, or collecting it personally in restaurant. Moreover users can browse whole menu, they can also add items to cart even when they are not logged in. Cart stores all their data in cookies, so even if they close browser, they still have their orders.
+Idea of this project came from the real aplication which I have created during CS50 course, my boss asked me to do application for online ordering for the restaurant in which I was working. This project is smaller part of my website, because here I just want to focus on cart, and cookies. You can find whole website here https://restauracjaverona.pl/
+
+My website is for users which live close to restaurant, it allows them to order food to their houses, or collecting it personally in restaurant. Moreover users can browse whole menu, they can also add items to cart even when they are not logged in. Cart stores all their data in cookies, so even if they close browser, they still have their orders.
 
 When you arrive at the homepage you can see the big slider with the photos of the restaurant. You can also see current meal of the day, which is special for every week. And a little description of the restaurant which changes during special events. In information part, you can see two cards which links to contact, and events pages. You can also see current recommendations, and the location of restaurant on google maps.
 
